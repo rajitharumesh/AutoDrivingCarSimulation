@@ -36,7 +36,7 @@ class AutoDrivingCarSimulation
                     direction = RotateRight(direction);
                     break;
                 case 'F':
-                    //TBD
+                    (int newX, int newY) = MoveForward(x, y, direction);
                     break;
             }
         }
@@ -76,8 +76,20 @@ class AutoDrivingCarSimulation
         }
     }
 
-    static char MoveForward()
+    static(int, int) MoveForward(int x, int y, char direction)
     {
-        return 'N';
+        switch (direction)
+        {
+            case 'N':
+                return (x, y + 1);
+            case 'E':
+                return (x + 1, y);
+            case 'S':
+                return (x, y - 1);
+            case 'W':
+                return (x - 1, y);
+            default:
+                return (x, y);
+        }
     }
 }
