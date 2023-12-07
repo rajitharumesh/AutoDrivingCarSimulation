@@ -5,22 +5,37 @@ class AutoDrivingCarSimulation
     static void Main()
     {
         Console.WriteLine("Welcome to Tesla Auto Driving Car Simulation");
+        Console.WriteLine("--------------------------------------------");
         Console.WriteLine("Please enter field size (width<space>height)");
-        // reading inputs
+
+        // 10 10
+        // 1 2 N
+        // FFRFFFRRLF
+
         string[] fieldSize = Console.ReadLine().Split(' ');
         int width = int.Parse(fieldSize[0]);
         int height = int.Parse(fieldSize[1]);
 
-        Console.WriteLine("Please enter Position with Direction (X<space>Y<space>D");
-        string[] currentPosition = Console.ReadLine().Split(' ');
-        int x = int.Parse(currentPosition[0]);
-        int y = int.Parse(currentPosition[1]);
-        char direction = char.Parse(currentPosition[2]);
+        //Console.WriteLine(int.Parse(fieldSize[0]));
 
-        Console.WriteLine("Please enter Subsequent Commands");
+        string[] initialPosition = Console.ReadLine().Split(' ');
+        int x = int.Parse(initialPosition[0]);
+        int y = int.Parse(initialPosition[1]);
+        char direction = char.Parse(initialPosition[2]);
+
+        
+
         string commands = Console.ReadLine();
-        SimulateCar(width, height, x, y, direction, commands);
 
+        // Simulating the car movement
+        Console.WriteLine(width);
+        Console.WriteLine(height);
+        Console.WriteLine(x);
+        Console.WriteLine(y);
+        Console.WriteLine(direction);
+
+
+        SimulateCar(width, height, x, y, direction, commands);
     }
 
     static void SimulateCar(int width, int height, int x, int y, char direction, string commands)
@@ -37,9 +52,16 @@ class AutoDrivingCarSimulation
                     break;
                 case 'F':
                     (int newX, int newY) = MoveForward(x, y, direction);
+                    if (IsValidMove(newX, newY, width, height))
+                    {
+                        x = newX;
+                        y = newY;
+                    }
                     break;
             }
         }
+        Console.WriteLine($"{x} {y} {direction}");
+        Console.ReadLine();
     }
 
     static char RotateLeft(char currentDirection)
@@ -76,7 +98,7 @@ class AutoDrivingCarSimulation
         }
     }
 
-    static(int, int) MoveForward(int x, int y, char direction)
+    static (int, int) MoveForward(int x, int y, char direction)
     {
         switch (direction)
         {
@@ -91,5 +113,10 @@ class AutoDrivingCarSimulation
             default:
                 return (x, y);
         }
+    }
+
+    static bool IsValidMove(int x, int y, int width, int height)
+    {
+        return x >= 0 && x < width && y >= 0 && y < height;
     }
 }
