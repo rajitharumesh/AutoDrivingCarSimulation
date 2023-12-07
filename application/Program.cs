@@ -16,25 +16,17 @@ class AutoDrivingCarSimulation
         int width = int.Parse(fieldSize[0]);
         int height = int.Parse(fieldSize[1]);
 
-        //Console.WriteLine(int.Parse(fieldSize[0]));
-
+        Console.WriteLine("Please enter current position (X<space>Y<space>N)");
         string[] initialPosition = Console.ReadLine().Split(' ');
         int x = int.Parse(initialPosition[0]);
         int y = int.Parse(initialPosition[1]);
         char direction = char.Parse(initialPosition[2]);
 
-        
 
+        Console.WriteLine("Please enter subsequent commands");
         string commands = Console.ReadLine();
 
         // Simulating the car movement
-        Console.WriteLine(width);
-        Console.WriteLine(height);
-        Console.WriteLine(x);
-        Console.WriteLine(y);
-        Console.WriteLine(direction);
-
-
         SimulateCar(width, height, x, y, direction, commands);
     }
 
